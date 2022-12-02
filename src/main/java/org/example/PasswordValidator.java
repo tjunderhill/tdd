@@ -1,37 +1,34 @@
 package org.example;
 
+import java.util.Arrays;
+
 public class PasswordValidator {
-  public static void main(String[] args) {
-    System.out.println("Hello world!");
-  }
-
-  public boolean passwordIsValid(String password) {
-    if (!checkPasswordLength(password)) {
-      return false;
+    private static boolean isLenthMoreThan8Chars(String input) {
+        return input.length() > 8;
     }
 
-    if (!containsAtLeastOneNumber(password)) {
-      return false;
+    private static boolean hasAtLeast1Number(String input) {
+        return input.matches(".*\\d.*");
     }
 
-    return true;
-  }
-
-
-  private boolean containsAtLeastOneNumber(String password) {
-    if (!password.matches(".*\\d.*")) {
-      return false;
+    private static boolean hasUppercase(String input) {
+        return !input.equals(input.toLowerCase());
     }
 
-    return true;
-  }
-
-
-  private boolean checkPasswordLength(String password) {
-    if (!(password.length() > 8)) {
-      return false;
+    private static boolean hasLowercase(String input) {
+        return !input.equals(input.toUpperCase());
     }
 
-    return true;
-  }
+    private static boolean hasSpecialchar(String input) {
+        String[] specialChars = {"_","$","@","#","+","-"};
+        return Arrays.stream(specialChars).anyMatch(input::contains);
+    }
+
+    public static boolean isValidPassword(String input) {
+        return isLenthMoreThan8Chars(input)
+                && hasAtLeast1Number(input)
+                && hasUppercase(input)
+                && hasLowercase(input)
+                && hasSpecialchar(input);
+    }
 }
