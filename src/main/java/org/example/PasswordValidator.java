@@ -6,6 +6,10 @@ public class PasswordValidator {
   }
 
   public boolean passwordIsValid(String password) {
-    return true;
+    if (password.length() > 8){
+      return true;
+    } else {
+      return false;
+    }
   }
 }
