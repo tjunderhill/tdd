@@ -6,10 +6,32 @@ public class PasswordValidator {
   }
 
   public boolean passwordIsValid(String password) {
-    if (password.length() > 8){
-      return true;
-    } else {
+    if (!checkPasswordLength(password)) {
       return false;
     }
+
+    if (!containsAtLeastOneNumber(password)) {
+      return false;
+    }
+
+    return true;
+  }
+
+
+  private boolean containsAtLeastOneNumber(String password) {
+    if (!password.matches(".*\\d.*")) {
+      return false;
+    }
+
+    return true;
+  }
+
+
+  private boolean checkPasswordLength(String password) {
+    if (!(password.length() > 8)) {
+      return false;
+    }
+
+    return true;
   }
 }
